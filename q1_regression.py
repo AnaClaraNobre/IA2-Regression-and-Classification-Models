@@ -94,49 +94,49 @@ model_names = {
     1: 'MQO regularizado (1)'
 }
 
+# Calcula a média, desvio-padrão, valor máximo e mínimo do RSS para cada modelo
 metrics = []
 for model, rss_list in rss_results.items():
     metrics.append({
         'Modelos': model_names.get(model, model),
-        'Média': np.mean(rss_list),
-        'Desvio-Padrão': np.std(rss_list),
-        'Maior Valor': np.max(rss_list),
-        'Menor Valor': np.min(rss_list)
+        'Média': round(np.mean(rss_list), 2),
+        'Desvio-Padrão': round(np.std(rss_list), 2),
+        'Maior Valor': round(np.max(rss_list), 2),
+        'Menor Valor': round(np.min(rss_list), 2)
     })
 
+# Criar um DataFrame com as colunas ordenadas conforme o exemplo fornecido
 metrics_df = pd.DataFrame(metrics)
 metrics_df = metrics_df[['Modelos', 'Média', 'Desvio-Padrão', 'Maior Valor', 'Menor Valor']]
 
+# Gráfico de barras
+fig, ax1 = plt.subplots(figsize=(12, 6))
+metrics_df.plot(
+    x='Modelos', 
+    y=['Média', 'Desvio-Padrão', 'Maior Valor', 'Menor Valor'], 
+    kind='bar', 
+    ax=ax1
+)
+ax1.set_title("Análise de Desempenho dos Modelos de Regressão")
+ax1.set_xlabel("Modelos")
+ax1.set_ylabel("Valores de RSS")
+ax1.legend(loc="upper right", title="Métricas")
+ax1.tick_params(axis='x', rotation=45)  # Inclinação para melhor legibilidade
+plt.tight_layout()
+plt.show()  # Exibe o gráfico de barras
 
-fig, ax = plt.subplots(figsize=(10, 4)) 
-ax.axis('tight')
-ax.axis('off')
-
-table = ax.table(
+# Gráfico de tabela
+fig, ax2 = plt.subplots(figsize=(10, 4))
+ax2.axis('tight')
+ax2.axis('off')
+table = ax2.table(
     cellText=metrics_df.values,
     colLabels=metrics_df.columns,
     cellLoc='center',
     loc='center'
 )
-
 table.auto_set_font_size(False)
 table.set_fontsize(10)
 table.auto_set_column_width(col=list(range(len(metrics_df.columns))))  
-
 plt.title("Resultados da Validação com Monte Carlo - Tabela de Métricas")
-plt.show()
-
-fig, ax = plt.subplots(figsize=(12, 8))
-metrics_df.plot(
-    x='Modelos', 
-    y=['Média', 'Desvio-Padrão', 'Maior Valor', 'Menor Valor'], 
-    kind='bar', 
-    ax=ax
-)
-plt.title("Análise de Desempenho dos Modelos de Regressão")
-plt.xlabel("Modelos")
-plt.ylabel("Valores de RSS")
-plt.legend(loc="upper right", title="Métricas")
-plt.xticks(rotation=45, ha="right")  
-plt.tight_layout()  
-plt.show()
+plt.show()  
