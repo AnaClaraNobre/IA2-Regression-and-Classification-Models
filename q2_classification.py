@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
-file_path = 'C:/Users/anacl/OneDrive/Documentos/Pessoal/UNIFOR/IA2_regressaoEClassificacao/EMGsDataset.csv'
+file_path = './EMGsDataset.csv'
 data = pd.read_csv(file_path, header=None)
 
 print("Amostra dos dados carregados:")
