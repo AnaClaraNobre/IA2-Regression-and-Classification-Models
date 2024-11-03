@@ -94,6 +94,11 @@ model_names = {
     1: 'MQO regularizado (1)'
 }
 
+print("RSS por rodada para cada modelo:")
+for model, rss_list in rss_results.items():
+    print(f"\nModelo: {model_names.get(model, model)}")
+    print(rss_list)
+
 # Calcula a média, desvio-padrão, valor máximo e mínimo do RSS para cada modelo
 metrics = []
 for model, rss_list in rss_results.items():
