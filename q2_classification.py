@@ -251,11 +251,13 @@ metrics_df = pd.DataFrame(metrics)
 print("Tabela de Resultados de Acurácia:")
 print(metrics_df)
 
-plt.figure(figsize=(12, 8))
-metrics_df.set_index('Model')[['Mean', 'Std Dev', 'Max', 'Min']].plot(kind='bar', figsize=(12, 8))
-plt.title("Análise de Acurácia dos Modelos - Monte Carlo Simulation")
-plt.xlabel("Modelos")
-plt.ylabel("Acurácia")
-plt.xticks(rotation=45)
-plt.legend(title="Métricas")
+fig, ax = plt.subplots(figsize=(12, 8))  
+ax.axis('tight')
+ax.axis('off')
+ax.table(cellText=metrics_df.values,
+         colLabels=metrics_df.columns,
+         cellLoc = 'center', 
+         loc='center')
+plt.title('Tabela de Resultados de Acurácia', fontsize=14)
+plt.savefig('tabela_resultados_acuracia.png', bbox_inches='tight') 
 plt.show()

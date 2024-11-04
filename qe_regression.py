@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_path = 'C:/Users/anacl/OneDrive/Documentos/Pessoal/UNIFOR/IA2_regressaoEClassificacao/aerogerador.dat'
+file_path = './aerogerador.dat'
 data = pd.read_csv(file_path, sep='\t', header=None)
 data.columns = ['Velocidade_Vento', 'Potencia_Gerada']
 
